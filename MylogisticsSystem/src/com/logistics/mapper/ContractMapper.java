@@ -37,4 +37,18 @@ public class ContractMapper {
 				Integer.parseInt(map.get("pageSize").toString()));
 	}
 
+	public List getContractInfo(int contractid) {
+		// TODO Auto-generated method stub
+		return mapper.getContractInfo(contractid);
+	}
+    //删除合同
+	public boolean delContract(int contractid) {
+		// TODO Auto-generated method stub
+		int count = mapper.delContract(contractid);
+		if (count > 0)
+			return true;
+		else
+			return false;
+	}
+
 }

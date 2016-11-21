@@ -28,25 +28,30 @@
 				<div class="bigbox">
 					<!-- Begin of  #Inner -->
 					<div class="contentBox2">
+					<c:forEach var="cinfo" items="${list}">
 						<div class="contentBoxTop2">
 							<h3>
-								合同管理
+								${cinfo.contract_name}
 							</h3>
 						</div>
 						<div class="innerContent">
-						111111<br/>
-						111111<br/>
-						111111<br/>
-						1111<br/>
-						11<br/>
-						1<br/>
-						1<br/><br/>
-						1
-						1<br/><br/>
-						11
-						1<br/>
-						1<br/>
 						
+						<span>${cinfo.contract_content}</span></br>
+						<div class="righttext">
+						<div>
+						     托运方:<span>${cinfo.contract_customer}</span>
+						</div>
+						<div >
+						     承运方:<span>${cinfo.contract_carrier}</span>
+						</div>
+						<div > 
+						     签订时间:<span>${cinfo.contract_signdate}</span>
+						</div>
+						<div >
+						     到期时间:<span>${cinfo.contract_duedate}</span>
+						</div>
+						</div>
+						</c:forEach>
 						</div>
 					</div>
 					<!-- End of  #Inner -->
@@ -55,7 +60,6 @@
 
 			<!-- End of  #contentlist -->
 		</div>
-		<jsp:include page="../shared/manager_siderbar.jsp"></jsp:include>
 		</div>
 		</div>
 		<jsp:include page="../shared/manager_footer.jsp"></jsp:include>

@@ -40,19 +40,19 @@
 							</tr>
 										<!-- 
 										href="<%=basePath%>contract/details/${item.contract_id}"
+										<li class="iconEdit"><a href="<%=basePath%>contract/update/">编辑</a></li>
 										 -->
 							<c:forEach items="${list}" var="item">
 								<tr class="oddRow">
 									<td class="check_list"><input type="checkbox" id="list"
 										name="list" /></td>
 									<td class="list_title">
-										<a href="contract/detail"
+										<a href="<%=basePath%>contract/detail?id=${item.contract_id}"
 										title="${item.contract_name}">${item.contract_name}</a></td>
 									<td class="list_time">${item.contract_carrier}</td>
 									<td class="editItem">
-										<ul class="editlist">
-											<li class="iconEdit"><a href="<%=basePath%>contract/update/">编辑</a></li>
-											<li class="iconDel"><a onclick="return confirm('您确认要删除当前数据吗？')" href="<%=basePath%>contract/delData/">删除</a></li>
+										<ul class="editlist">								
+											<li class="iconDel"><a onclick="return confirm('您确认要删除当前数据吗？')" href="<%=basePath%>contract/delData?id=${item.contract_id}">删除</a></li>
 										</ul>
 									</td>
 								</tr>

@@ -1,5 +1,6 @@
 package com.logistics.controller;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -98,14 +99,15 @@ public class ContractController extends BaseController {
 		List<UserInfo> userlist=userm.getNoSetCenterManagerList();
 
 		request.setAttribute("userlist", userlist);
+		
 		return view;
 	}
 
 	// 新增合同数据提交
 	@RequestMapping("/createContract")
-	public String createCenter(ContractInfo ci) {
+	public String createContract(ContractInfo ci) {
 		// 创建成功后跳转的页面地址
-		String view = "redirect:/contract/managercontract";
+		String view = "redirect:/contract/managecontract";
 		// 添加数据
 		if (cm.createContract(ci)) {
 			// 创建成功
@@ -145,12 +147,41 @@ public class ContractController extends BaseController {
 	}
 	// 
 	@RequestMapping("/detail")
-	public String detail(HttpServletRequest request) {
+	public String detail(HttpServletRequest request, Model model,
+			@RequestParam(required = false) String searchInfo) {
 		// 初始化菜单
 		String view = initMenu(request, "contract/detail");
 		List<UserInfo> userlist=userm.getNoSetCenterManagerList();
 		request.setAttribute("userlist", userlist);
+		int id =Integer.valueOf(request.getParameter("id"));
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		// 其实这个searchInfo就是我们动态查询时的查询条件，这里无用
+		map.put("searchInfo", searchInfo);
+		
+		List list = cm.getContractInfo(id);//getCenterAndManagerList(map);
+		// list为我们的需要显示的数据List
+		// 初始化结果
+		this.initResult(model, list, map);
 		return view;
+	}
+	
+	// 删除合同数据
+	@RequestMapping("/delData")
+	public String delContract(HttpServletRequest request,ContractInfo ci) {
+		// 删除成功后跳转的页面地址
+		String view = "redirect:/contract/managecontract";
+		// 删除数据
+		int contractid=Integer.valueOf(request.getParameter("id"));
+		if (cm.delContract(contractid)) {
+			// 删除成功
+			JOptionPane.showMessageDialog(null, "删除成功!");
+			return view;
+		} else {
+			// 删除失败
+			JOptionPane.showMessageDialog(null, "删除失败!");
+			return "redirect:/contract/managecontract";
+		}
 	}
 	
 }

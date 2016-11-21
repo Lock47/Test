@@ -34,5 +34,7 @@
 		<mapper class="com.logistics.idal.ICityMapper"/>
 		<mapper class="com.logistics.idal.IDepartmentMapper"/>
 		<mapper class="com.logistics.idal.IContractMapper"/>
+		<mapper class="com.logistics.idal.ICompanyMapper"/>
+		
 	</mappers>
 </configuration>
