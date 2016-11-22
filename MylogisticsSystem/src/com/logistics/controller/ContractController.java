@@ -184,4 +184,28 @@ public class ContractController extends BaseController {
 		}
 	}
 	
+	// 管理合同
+	@RequestMapping("/query")
+	public String QueryContract(HttpServletRequest request, Model model,
+			@RequestParam(required = false) String searchInfo,
+			@RequestParam(required = false) Integer pageNum,
+			@RequestParam(required = false) Integer pageSize) {
+		// 初始化菜单
+		String view = initMenu(request, "contract/managecontract");
+		// 添加分页相关信息
+		// 创建Map，来存放我们的数据，
+		Map<String, Object> map = new HashMap<String, Object>();
+		// 其实这个searchInfo就是我们动态查询时的查询条件，这里无用
+		map.put("searchInfo", searchInfo);
+		// 取出数据总数，
+		Integer totalCount = cm.getContractAndCarrierListCount();
+		// 初始化分页数据，map对应的model，pageNum对应当前页，pageSize为每页显示的数据，totalCount为数据总行数
+		this.initPage(map, pageNum, pageSize, totalCount);
+		// list为我们的需要显示的数据List ，获取的返回值是我们常用的List<实体类>形式
+		List list = cm.getContractListByID(map);//getContractList(map);
+		// list为我们的需要显示的数据List
+		// 初始化结果
+		this.initResult(model, list, map);
+		return view;
+	}
 }

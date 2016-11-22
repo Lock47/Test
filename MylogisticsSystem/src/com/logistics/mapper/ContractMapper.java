@@ -50,5 +50,13 @@ public class ContractMapper {
 		else
 			return false;
 	}
+	
+	public List<ContractInfo> getContractListByID(Map<String, Object> map) {
+		return mapper.getContractListByID(
+				Integer.parseInt(map.get("startIndex").toString()),
+				Integer.parseInt(map.get("pageSize").toString()),
+				Integer.parseInt(map.get("searchInfo").toString())
+		);
+	}
 
 }

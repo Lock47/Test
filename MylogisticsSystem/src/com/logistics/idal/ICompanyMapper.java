@@ -40,6 +40,7 @@ public interface ICompanyMapper {
 	@Options(statementType = StatementType.CALLABLE)
 	public List<CompanyInfo> getCompanyListByTel(String text);
 	
+	//无用
 	@Select("CALL getCompanyListByEmail(#{0})")
 	@Options(statementType = StatementType.CALLABLE)
 	public List<CompanyInfo> getCompanyListByEmail(String text);

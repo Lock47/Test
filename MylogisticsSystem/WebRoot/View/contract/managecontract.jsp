@@ -59,8 +59,9 @@
 							</c:forEach>
 						</table>
 						<!-- 分页开始 -->
-						<form method="post" id="searchForm" action="<%=path%>/contract/managercontract">
-							<input type="hidden" name="searchInfo" value="${searchInfo}">
+						<form method="post" id="searchForm" action="<%=path%>/contract/query">
+							<td>根据ID查询:</td>
+							<input type="" name="searchInfo" value="${searchInfo}" placeholder="回车查询">
 						</form>
 						<page:createPager pageSize="${pageSize}" totalPage="${totalPage}"
 							totalCount="${totalCount}" curPage="${pageNum}"

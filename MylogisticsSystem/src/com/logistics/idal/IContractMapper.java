@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.mapping.StatementType;
 
+import com.logistics.model.CompanyInfo;
 import com.logistics.model.ContractInfo;
 
 
@@ -37,4 +38,9 @@ public interface IContractMapper {
 	@Options(statementType = StatementType.CALLABLE)
 	public int delContract(int contractid);
 	
+	@Select("CALL getContractListByID(#{0},#{1},#{2})")
+	@Options(statementType = StatementType.CALLABLE)
+	public List<ContractInfo> getContractListByID(int startIndex,
+			int pageSize,int id);
+
 }
