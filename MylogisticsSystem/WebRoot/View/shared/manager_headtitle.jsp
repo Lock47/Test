@@ -9,4 +9,8 @@
 	href="<%=basePath%>content/manager/content.css" />
 <link rel="stylesheet" type="text/css"
 	href="<%=basePath%>content/manager/manager.css" />
+<link rel="stylesheet" type="text/css"
+	href="<%=basePath%>content/bootstrap/bootstrap.css" />
+
+
 </head>

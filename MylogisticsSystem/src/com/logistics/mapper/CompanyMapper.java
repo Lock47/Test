@@ -16,8 +16,8 @@ public class CompanyMapper {
 	ICompanyMapper mapper = session.getMapper(ICompanyMapper.class);
 
 	// 实现方法
-	public CompanyInfo getCompanyInfo() {
-		return mapper.getCompanyInfo();
+	public List<CompanyInfo> getCompanyInfo(int id) {
+		return mapper.getCompanyInfo(id);
 	}
 
 	public int getCompanyListCount() {
@@ -48,5 +48,20 @@ public class CompanyMapper {
 			return true;
 		else
 			return false;
+	}
+
+	public List<CompanyInfo> getCompanyListByID(String text) {
+		// TODO Auto-generated method stub
+		return mapper.getCompanyListByID(text);
+	}
+
+	public List<CompanyInfo> getCompanyListByTel(String text) {
+		// TODO Auto-generated method stub
+		return mapper.getCompanyListByTel(text);
+	}
+	
+	public List<CompanyInfo> getCompanyListByEmail(String text) {
+		// TODO Auto-generated method stub
+		return mapper.getCompanyListByEmail(text);
 	}
 }

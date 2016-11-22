@@ -25,11 +25,11 @@ import com.logistics.model.UserInfo;
 
 @Controller
 @RequestMapping("/customer")
-public class CustomerController extends BaseController{
+public class CustomerController extends BaseController {
 	// 引入常用的方法对象并实例化
 	MenuMapper menuMapper = new MenuMapper();
 	CompanyMapper cm = new CompanyMapper();
-	UserMapper userm= new UserMapper();
+	UserMapper userm = new UserMapper();
 
 	// 首页
 	@RequestMapping("/")
@@ -56,10 +56,10 @@ public class CustomerController extends BaseController{
 		view.addObject("siderlist", siderlist);
 		// 登录的用户名放入这个对象中，传递给前端
 		view.addObject("welcome", logname);
-		
+
 		return view;
 	}
-	
+
 	public String initMenu(HttpServletRequest request, String pager) {
 		// 获取session内的用户信息
 		HttpSession session = request.getSession();
@@ -89,20 +89,20 @@ public class CustomerController extends BaseController{
 
 		return pager;
 	}
-	
+
 	// 新增客户
 	@RequestMapping("/addcustomer")
 	public String addcenter(HttpServletRequest request) {
 		// 初始化菜单
 		String view = initMenu(request, "customer/addcustomer");
 
-		List<UserInfo> userlist=userm.getNoSetCenterManagerList();
+		List<UserInfo> userlist = userm.getNoSetCenterManagerList();
 
 		request.setAttribute("userlist", userlist);
-		
+
 		return view;
 	}
-	
+
 	// 新增客户
 	@RequestMapping("/createCustomer")
 	public String addcenter(CompanyInfo ci) {
@@ -119,8 +119,7 @@ public class CustomerController extends BaseController{
 			return "redirect:/customer/addcustomer";
 		}
 	}
-	
-	
+
 	// 管理合同
 	@RequestMapping("/managecustomer")
 	public String managercenter(HttpServletRequest request, Model model,
@@ -139,20 +138,20 @@ public class CustomerController extends BaseController{
 		// 初始化分页数据，map对应的model，pageNum对应当前页，pageSize为每页显示的数据，totalCount为数据总行数
 		this.initPage(map, pageNum, pageSize, totalCount);
 		// list为我们的需要显示的数据List ，获取的返回值是我们常用的List<实体类>形式
-		List list = cm.getCompanyList(map);//getContractList(map);
+		List list = cm.getCompanyList(map);
 		// list为我们的需要显示的数据List
 		// 初始化结果
 		this.initResult(model, list, map);
 		return view;
 	}
-	
+
 	// 删除客户数据
 	@RequestMapping("/delData")
-	public String delCompanyInfo(HttpServletRequest request,CompanyInfo ci) {
+	public String delCompanyInfo(HttpServletRequest request, CompanyInfo ci) {
 		// 删除成功后跳转的页面地址
 		String view = "redirect:/customer/managecustomer";
 		// 删除数据
-		int companyid=Integer.valueOf(request.getParameter("id"));
+		int companyid = Integer.valueOf(request.getParameter("id"));
 		if (cm.delCompanyInfo(companyid)) {
 			// 删除成功
 			JOptionPane.showMessageDialog(null, "删除成功!");
@@ -163,5 +162,80 @@ public class CustomerController extends BaseController{
 			return "redirect:/customer/managecustomer";
 		}
 	}
+
+	// 查询客户
+	@RequestMapping("/querycustomer")
+	public String Querycustomer(HttpServletRequest request) {
+		// 初始化菜单
+		String view = initMenu(request, "customer/querycustomer");
+
+		List<UserInfo> userlist = userm.getNoSetCenterManagerList();
+		request.setAttribute("userlist", userlist);
+
+		return view;
+	}
+
+	@RequestMapping("/query")
+	public String Query(HttpServletRequest request, Model model,
+			@RequestParam(required = false) String searchInfo,
+			@RequestParam(required = false) Integer pageNum,
+			@RequestParam(required = false) Integer pageSize) {
+		// 初始化菜单
+		String view = initMenu(request, "customer/queryres");
+
+		List<UserInfo> userlist = userm.getNoSetCenterManagerList();
+		request.setAttribute("userlist", userlist);
+
+		Map<String, Object> map = new HashMap<String, Object>();
+		// 其实这个searchInfo就是我们动态查询时的查询条件，这里无用
+		map.put("searchInfo", searchInfo);
+
+		Integer totalCount = cm.getCompanyListCount();
+		// 初始化分页数据，map对应的model，pageNum对应当前页，pageSize为每页显示的数据，totalCount为数据总行数
+		this.initPage(map, pageNum, pageSize, totalCount);
+		// list为我们的需要显示的数据List ，获取的返回值是我们常用的List<实体类>形式
+
+		String type = request.getParameter("select_type");
+		String text = request.getParameter("select_text");
+
+		if (type.equals("ID")) {
+			List list = cm.getCompanyListByID(text);// getContractList(map);
+			// list为我们的需要显示的数据List
+			// 初始化结果
+			this.initResult(model, list, map);
+			return view;
+		} else if (type.equals("Tel")) {
+			List list = cm.getCompanyListByTel(text);// getContractList(map);
+			// list为我们的需要显示的数据List
+			// 初始化结果
+			this.initResult(model, list, map);
+			return view;
+		} else if (type.equals("Email")) {
+			JOptionPane.showMessageDialog(null, "没有客户邮箱!");
+			view = initMenu(request, "customer/querycustomer");
+			return view;
+		}
+		return view;
+	}
 	
+	@RequestMapping("/detail")
+	public String detail(HttpServletRequest request, Model model,
+			@RequestParam(required = false) String searchInfo) {
+		// 初始化菜单
+		String view = initMenu(request, "customer/detail");
+		List<UserInfo> userlist=userm.getNoSetCenterManagerList();
+		request.setAttribute("userlist", userlist);
+		int id =Integer.valueOf(request.getParameter("id"));
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		// 其实这个searchInfo就是我们动态查询时的查询条件，这里无用
+		map.put("searchInfo", searchInfo);
+		
+		List list = cm.getCompanyInfo(id);//getCenterAndManagerList(map);
+		// list为我们的需要显示的数据List
+		// 初始化结果
+		this.initResult(model, list, map);
+		
+		return view;
+	}
 }

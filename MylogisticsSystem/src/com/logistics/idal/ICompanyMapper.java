@@ -9,13 +9,12 @@ import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.mapping.StatementType;
 
 import com.logistics.model.CompanyInfo;
-import com.logistics.model.ContractInfo;
 
 public interface ICompanyMapper {
     
-	@Select("CALL getCompanyInfo()")
+	@Select("CALL getCompanyInfo(#{0})")
 	@Options(statementType = StatementType.CALLABLE)
-	public CompanyInfo getCompanyInfo();
+	public List<CompanyInfo> getCompanyInfo(int id);
 	
 	@Select("CALL getCompanyListCount()")
 	@Options(statementType = StatementType.CALLABLE)
@@ -33,5 +32,17 @@ public interface ICompanyMapper {
 	@Options(statementType = StatementType.CALLABLE)
 	public int createCompany(CompanyInfo ci);
 
+	@Select("CALL getCompanyListByID(#{0})")
+	@Options(statementType = StatementType.CALLABLE)
+	public List<CompanyInfo> getCompanyListByID(String text);
+
+	@Select("CALL getCompanyListByTel(#{0})")
+	@Options(statementType = StatementType.CALLABLE)
+	public List<CompanyInfo> getCompanyListByTel(String text);
+	
+	@Select("CALL getCompanyListByEmail(#{0})")
+	@Options(statementType = StatementType.CALLABLE)
+	public List<CompanyInfo> getCompanyListByEmail(String text);
+	
 
 }

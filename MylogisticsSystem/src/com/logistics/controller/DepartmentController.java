@@ -90,6 +90,7 @@ public class DepartmentController extends BaseController {
 		request.setAttribute("citylist", citylist);
 		request.setAttribute("arealist", arealist);
 		request.setAttribute("userlist", userlist);
+		
 		return view;
 	}
 
