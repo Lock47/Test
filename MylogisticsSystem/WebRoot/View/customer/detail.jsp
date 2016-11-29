@@ -27,40 +27,40 @@
 				<div class="bigbox">
 					<!-- Begin of  #Inner -->
 					<div class="contentBox2">
-						<c:forEach var="cinfo" items="${list}">
+						
 							<div class="contentBoxTop2">
 								<h3>
-									${cinfo.company_name}
+									${companyInfo.company_name}
 								</h3>
 							</div>
 							<div class="innerContent">
 								<div>
 									<div>
 										客户ID:
-										<span>${cinfo.company_id}</span>
+										<span>${companyInfo.company_id}</span>
 									</div>
 									<div>
 										客户代码:
-										<span>${cinfo.company_code}</span>
+										<span>${companyInfo.company_code}</span>
 									</div>
 									<div>
 										客户许可证号:
-										<span>${cinfo.company_license}</span>
+										<span>${companyInfo.company_license}</span>
 									</div>
 									<div>
 										客户地址:
-										<span>${cinfo.company_address}</span>
+										<span>${companyInfo.company_address}</span>
 									</div>
 									<div>
 										客户联系方式:
-										<span>${cinfo.company_tel}</span>
+										<span>${companyInfo.company_tel}</span>
 									</div>
 									<div>
 										客户公司性质:
-										<span>${cinfo.company_content}</span>
+										<span>${companyInfo.company_content}</span>
 									</div>
 								</div>
-						</c:forEach>
+		
 					</div>
 				</div>
 				<!-- End of  #Inner -->

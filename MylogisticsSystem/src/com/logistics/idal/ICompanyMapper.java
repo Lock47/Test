@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 import org.apache.ibatis.mapping.StatementType;
 
 import com.logistics.model.CompanyInfo;
@@ -14,7 +15,11 @@ public interface ICompanyMapper {
     
 	@Select("CALL getCompanyInfo(#{0})")
 	@Options(statementType = StatementType.CALLABLE)
-	public List<CompanyInfo> getCompanyInfo(int id);
+	public CompanyInfo getCompanyInfo(int id);
+	
+	@Select("CALL getCompanyInfo2(#{0})")
+	@Options(statementType = StatementType.CALLABLE)
+	public CompanyInfo getCompanyInfo2(int id);
 	
 	@Select("CALL getCompanyListCount()")
 	@Options(statementType = StatementType.CALLABLE)
@@ -44,6 +49,15 @@ public interface ICompanyMapper {
 	@Select("CALL getCompanyListByEmail(#{0})")
 	@Options(statementType = StatementType.CALLABLE)
 	public List<CompanyInfo> getCompanyListByEmail(String text);
+
+	@Update("CALL updateCompanyInfo(#{company_id},#{company_name},#{company_code},#{company_license},#{company_address},#{company_tel},#{company_content})")
+	@Options(statementType = StatementType.CALLABLE)
+	public int updateCompanyInfo(CompanyInfo ci);
+
+
+
+	
+
 	
 
 }

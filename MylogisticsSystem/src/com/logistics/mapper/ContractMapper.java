@@ -37,7 +37,7 @@ public class ContractMapper {
 				Integer.parseInt(map.get("pageSize").toString()));
 	}
 
-	public List getContractInfo(int contractid) {
+	public ContractInfo getContractInfo(int contractid) {
 		// TODO Auto-generated method stub
 		return mapper.getContractInfo(contractid);
 	}

@@ -5,8 +5,8 @@
 	<div class="header">
 		<div class="header_logo"></div>
 		<div class="header_logInfo">
-			欢迎您 <strong>${welcome}</strong>! [ <a href="/Account/LogOff">退出</a> ]
-			| <a href="/">首页</a>
+			欢迎您 <strong>${welcome}</strong>! [ <a href="login">退出</a> ]
+			| <a href="admin/index">首页</a>
 		</div>
 	</div>
 	<div class="manager_nav_bg">

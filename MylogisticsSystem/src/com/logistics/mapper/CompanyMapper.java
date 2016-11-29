@@ -16,10 +16,14 @@ public class CompanyMapper {
 	ICompanyMapper mapper = session.getMapper(ICompanyMapper.class);
 
 	// 实现方法
-	public List<CompanyInfo> getCompanyInfo(int id) {
+	public CompanyInfo getCompanyInfo(int id) {
 		return mapper.getCompanyInfo(id);
 	}
-
+	
+	public CompanyInfo getCompanyInfo2(int id) {
+		return mapper.getCompanyInfo2(id);
+	}
+	
 	public int getCompanyListCount() {
 		// TODO Auto-generated method stub
 		return mapper.getContractAndCarrierListCount();
@@ -64,4 +68,14 @@ public class CompanyMapper {
 		// TODO Auto-generated method stub
 		return mapper.getCompanyListByEmail(text);
 	}
+
+	public boolean updateCompany(CompanyInfo ci) {
+		int count=mapper.updateCompanyInfo(ci);
+		if(count>0)
+			return true;
+		else
+			return false;
+	}
+	
+	
 }

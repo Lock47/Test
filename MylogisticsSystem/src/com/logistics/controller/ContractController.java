@@ -19,6 +19,7 @@ import com.logistics.interceptor.MemberInterceptor;
 import com.logistics.mapper.ContractMapper;
 import com.logistics.mapper.MenuMapper;
 import com.logistics.mapper.UserMapper;
+import com.logistics.model.CompanyInfo;
 import com.logistics.model.ContractInfo;
 import com.logistics.model.MenuInfo;
 import com.logistics.model.UserInfo;
@@ -152,17 +153,12 @@ public class ContractController extends BaseController {
 		// 初始化菜单
 		String view = initMenu(request, "contract/detail");
 		List<UserInfo> userlist=userm.getNoSetCenterManagerList();
-		request.setAttribute("userlist", userlist);
+
 		int id =Integer.valueOf(request.getParameter("id"));
 		
-		Map<String, Object> map = new HashMap<String, Object>();
-		// 其实这个searchInfo就是我们动态查询时的查询条件，这里无用
-		map.put("searchInfo", searchInfo);
+		ContractInfo ci = cm.getContractInfo(id);
+		request.setAttribute("contractInfo", ci);
 		
-		List list = cm.getContractInfo(id);//getCenterAndManagerList(map);
-		// list为我们的需要显示的数据List
-		// 初始化结果
-		this.initResult(model, list, map);
 		return view;
 	}
 	

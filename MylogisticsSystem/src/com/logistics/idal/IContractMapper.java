@@ -32,7 +32,7 @@ public interface IContractMapper {
 	//获取合同详细信息
 	@Select("CALL getContractInfo(#{contract_id})")
 	@Options(statementType = StatementType.CALLABLE)
-	public List<ContractInfo> getContractInfo(int contractid);
+	public ContractInfo getContractInfo(int contractid);
 
 	@Delete("CALL delContractInfo(#{contract_id})")
 	@Options(statementType = StatementType.CALLABLE)

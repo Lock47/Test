@@ -28,30 +28,28 @@
 				<div class="bigbox">
 					<!-- Begin of  #Inner -->
 					<div class="contentBox2">
-					<c:forEach var="cinfo" items="${list}">
 						<div class="contentBoxTop2">
 							<h3>
-								${cinfo.contract_name}
+								${contractInfo.contract_name}
 							</h3>
 						</div>
 						<div class="innerContent">
 						
-						<span>${cinfo.contract_content}</span></br>
+						<span>${contractInfo.contract_content}</span></br>
 						<div class="righttext">
 						<div>
-						     托运方:<span>${cinfo.contract_customer}</span>
+						     托运方:<span>${contractInfo.contract_customer}</span>
 						</div>
 						<div >
-						     承运方:<span>${cinfo.contract_carrier}</span>
+						     承运方:<span>${contractInfo.contract_carrier}</span>
 						</div>
 						<div > 
-						     签订时间:<span>${cinfo.contract_signdate}</span>
+						     签订时间:<span>${contractInfo.contract_signdate}</span>
 						</div>
 						<div >
-						     到期时间:<span>${cinfo.contract_duedate}</span>
+						     到期时间:<span>${contractInfo.contract_duedate}</span>
 						</div>
 						</div>
-						</c:forEach>
 						</div>
 					</div>
 					<!-- End of  #Inner -->

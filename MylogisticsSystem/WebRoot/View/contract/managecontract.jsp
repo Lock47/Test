@@ -34,7 +34,8 @@
 							<tr>
 								<th><input type="checkbox" value="全选" onclick="ChooseAll()" />
 								</th>
-								<th>合同名称</th>
+								<th>ID</th>
+								<th>合同名称</th>															
 								<th>负责人</th>
 								
 							</tr>
@@ -46,6 +47,7 @@
 								<tr class="oddRow">
 									<td class="check_list"><input type="checkbox" id="list"
 										name="list" /></td>
+									<td class="list_id">${item.contract_id}</td>
 									<td class="list_title">
 										<a href="<%=basePath%>contract/detail?id=${item.contract_id}"
 										title="${item.contract_name}">${item.contract_name}</a></td>

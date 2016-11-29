@@ -52,7 +52,7 @@
 									<td class="list_time">${item.company_content}</td>
 									<td class="editItem">
 										<ul class="editlist">	
-											<li class="iconEdit"><a href="<%=basePath%>customer/update?id=${item.company_id}">编辑</a></li>
+											<li class="iconEdit"><a href="<%=basePath%>customer/update/${item.company_id}">编辑</a></li>
 											<li class="iconDel"><a onclick="return confirm('您确认要删除当前数据吗？')" href="<%=basePath%>customer/delData?id=${item.company_id}">删除</a></li>
 										</ul>
 									</td>

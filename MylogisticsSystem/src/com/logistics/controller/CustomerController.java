@@ -10,6 +10,7 @@ import javax.swing.JOptionPane;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
@@ -18,6 +19,7 @@ import com.logistics.interceptor.MemberInterceptor;
 import com.logistics.mapper.CompanyMapper;
 import com.logistics.mapper.MenuMapper;
 import com.logistics.mapper.UserMapper;
+import com.logistics.model.AnnounceInfo;
 import com.logistics.model.CompanyInfo;
 import com.logistics.model.ContractInfo;
 import com.logistics.model.MenuInfo;
@@ -223,19 +225,40 @@ public class CustomerController extends BaseController {
 			@RequestParam(required = false) String searchInfo) {
 		// 初始化菜单
 		String view = initMenu(request, "customer/detail");
-		List<UserInfo> userlist=userm.getNoSetCenterManagerList();
-		request.setAttribute("userlist", userlist);
 		int id =Integer.valueOf(request.getParameter("id"));
 		
-		Map<String, Object> map = new HashMap<String, Object>();
-		// 其实这个searchInfo就是我们动态查询时的查询条件，这里无用
-		map.put("searchInfo", searchInfo);
+		CompanyInfo ci = cm.getCompanyInfo(id);
+		request.setAttribute("companyInfo", ci);
+		return view;
+	}
+	
+	//根据id更新页面
+	@RequestMapping("/update/{id}")
+	public String update(HttpServletRequest request,@PathVariable int id){
+		//初始化菜单
+		String view=initMenu(request, "customer/update");
+		//加载我的更新的数据
+		CompanyInfo ci = cm.getCompanyInfo2(id);
+		request.setAttribute("companyInfo", ci);
 		
-		List list = cm.getCompanyInfo(id);//getCenterAndManagerList(map);
-		// list为我们的需要显示的数据List
-		// 初始化结果
-		this.initResult(model, list, map);
-		
+		return view;
+	}
+	
+	//执行更新方法
+	@RequestMapping("/updatedata")
+	public String updateData(CompanyInfo ci){
+		String view = "";
+		//执行更新方法
+		if(cm.updateCompany(ci)){
+			//更新成功执行操作
+			JOptionPane.showMessageDialog(null, "更新成功!");
+			view="redirect:/customer/managecustomer";
+		}
+		else
+		{
+			JOptionPane.showMessageDialog(null, "更新失败!");
+			view="redirect:/customer/managecustomer";
+		}
 		return view;
 	}
 }
